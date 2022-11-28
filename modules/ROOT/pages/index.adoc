@@ -1,0 +1,6 @@
+= Wren:DS
+
+Wren:DS is an http://tools.ietf.org/html/rfc4510[LDAPv3^] compliant directory service, which has been developed for the Java platform, providing a high performance, highly available, and secure store for the identities managed by your organization.
+Its easy installation process, combined with the power of the Java platform makes Wren:DS the simplest, fastest directory to deploy and manage.
+
+Wren:DS is one of the projects in the Wren Security Suite, a community initiative that adopted open‐source projects formerly developed by ForgeRock, which has its own roots in Sun Microsystems’ products.
