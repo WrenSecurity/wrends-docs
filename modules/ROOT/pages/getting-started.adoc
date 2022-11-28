@@ -1,0 +1,12 @@
+= Getting Started
+
+You can get Wren:DS application in couple of ways.
+
+== Download binary release
+
+The easiest way to get the Wren:DS is to download the latest binary https://github.com/WrenSecurity/wrends/releases[release^].
+
+== Build the source code
+
+You can also create your own build from the source code.
+Manual how to build the source code can be found https://github.com/wrenSecurity/wrends#build-the-source-code[here^].
