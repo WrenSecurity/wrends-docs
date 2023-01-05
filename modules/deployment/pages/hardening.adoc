@@ -4,27 +4,27 @@ NOTE: TBD: Additional Instructions
 
 == Restricting Connection Handlers
 
-=== Disable LDAP Connector
+=== Disable LDAP Handler
 
 Disable plain LDAP connection handler:
 
 [,console]
 ----
-$ ./dsconfig --bindDN "cn=Directory Manager" --bindPassword "password" --port 4444 set-connection-handler-prop --handler-name "LDAP Connection Handler" --set enabled:false --trustAll --no-prompt
+$ ./dsconfig set-connection-handler-prop --handler-name "LDAP Connection Handler" --set enabled:false
 ----
 
-=== Disable SSL Protocols
+=== Update SSL Protocols
 
 Force TLSv1.2 and TLS v1.3 protocols only for LDAPS connection handler:
 
 [,console]
 ----
-$ ./dsconfig --bindDN "cn=Directory Manager" --bindPassword "password" --port 4444 set-connection-handler-prop set-connection-handler-prop --handler-name 'LDAPS Connection Handler' --set ssl-protocol:TLSv1.2 --set ssl-protocol:TLSv1.3 --trustAll --no-prompt
+$ ./dsconfig set-connection-handler-prop --handler-name 'LDAPS Connection Handler' --set ssl-protocol:TLSv1.2 --set ssl-protocol:TLSv1.3
 ----
 
 Force TLSv1.2 and TLS v1.3 protocols only for Admin connection handler:
 
 [,console]
 ----
-$ ./dsconfig --bindDN "cn=Directory Manager" --bindPassword "password" --port 4444 set-connection-handler-prop set-administration-connector-prop --set ssl-protocol:TLSv1.2 --set ssl-protocol:TLSv1.3 --trustAll --no-prompt
+$ ./dsconfig set-administration-connector-prop --set ssl-protocol:TLSv1.2 --set ssl-protocol:TLSv1.3
 ----

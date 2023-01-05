@@ -1,6 +1,6 @@
 name: wrends
 title: Wren:DS
-version: 0.0.1
+version: 5.x.x
 start_page: ROOT:index.adoc
 nav:
 - modules/ROOT/nav-intro.adoc
