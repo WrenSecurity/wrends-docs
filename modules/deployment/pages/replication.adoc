@@ -1,0 +1,57 @@
+= Replication
+
+Replication is used to automatically synchronize data between two or more directory server instances.
+The _dsreplication_ command works over SSL and uses the administration connector.
+The command can be used in no-prompt or interactive mode.
+
+
+== Enable Replication
+
+First enable replication by using the dsreplication subcommand _enable_.
+
+[,console]
+----
+./dsreplication enable --no-prompt --trustAll --baseDN dc=example,dc=com \
+        --adminUID $ADMIN_UID --adminPassword $ADMIN_PASSWORD \
+        --host1 $HOSTNAME1 --port1 4444 --bindDN1 "cn=Directory Manager" \
+        --bindPassword1 $PASSWORD1 --replicationPort1 8989 \
+        --host2 $HOSTNAME2 --port2 4444 --bindDN2 "cn=Directory Manager" \
+        --bindPassword2 $PASSWORD2 --replicationPort2 8989
+----
+
+IMPORTANT: Parameters have to be adjusted based on your environment settings.
+
+In case no Global Administator (`--adminUID`) was previously defined for none of the servers, it will be crated using the provided data.
+
+[TIP]
+====
+The _ADMIN_UID_ and _ADMIN_PASSWORD_ variables refer to the Global Administrator, which exists in the _cn=Administrators, cn=admin data_ subtree.
+You can take advantage of the _ldapsearch_ command to view the Global Administrator entry:
+
+[,console]
+----
+./ldapsearch --hostname $HOSTNAME1 --port 4444 --bindDN "cn=Directory Manager" --bindPassword $PASSWORD \
+        --useSSL --baseDN "cn=Administrators,cn=admin data" --searchScope sub "(objectclass=*)"
+----
+====
+
+If you use replication on two or more server instances already, this subcommand updates the configuration for each server of the replication topology.
+Therefore it is crucial to execute the subcommand once for each of the server instances.
+
+For further information about subcommand options use the _./dsreplication enable --help_ command:
+
+
+== Initialize Replication
+
+Once the replication is enabled the data on the destination directory server needs to be initialized.
+Use the _initialize_ subcommand and specify base DN to replicate the contents from the source server instance.
+
+[,console]
+----
+./dsreplication initialize --trustAll --no-prompt --baseDN dc=example,dc=com \
+        --adminUID $ADMIN_UID --adminPassword $ADMIN_PASSWORD \
+        --hostSource $HOSTNAME1 --portSource 4444 \
+        --hostDestination $HOSTNAME2 --portDestination 4444
+----
+
+TIP: If you use replication on two or more server instances, you can take advantage of the _initialize-all_ subcommand, which initializes the data on all the directory servers in the topology.
