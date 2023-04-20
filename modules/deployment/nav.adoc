@@ -1,2 +1,3 @@
 * Deployment Guide
 ** xref:hardening.adoc[Security Hardening]
+** xref:replication.adoc[Replication]
