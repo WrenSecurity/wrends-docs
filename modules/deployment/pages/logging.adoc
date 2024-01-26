@@ -1,0 +1,125 @@
+= Logging
+
+
+== Log Types
+
+
+=== Access
+
+Access logs in Wren:DS provide a detailed record of all access activity on the server, allowing for security monitoring, auditing, and problem diagnosis.
+These logs are essential for identifying unauthorized access and optimizing system performance.
+
+
+=== Audit
+
+Wren:DS audit log contains detailed record of all operations performed within the server's data and configuration.
+
+
+=== Debug
+
+Contains various operational information for troubleshooting and debugging.
+
+
+=== Error
+
+Error log captures various events related to the server in many categories, including JVM details, server start/stop actions, replication etc.
+
+
+=== Server
+
+The server log file located at `+${WRENDS_INSTANCE}/logs/server.out+` is used for capturing stdout and stderr streams.
+
+
+[#logging-log-publishers]
+== Log Publishers
+
+Log publishers are responsible for collecting, formatting, and dispatching logs to various destinations.
+
+Available log publisher types:
+
+* Csv File Access Log Publisher
+* Csv File HTTP Access Log Publisher
+* External Access Log Publisher
+* External HTTP Access Log Publisher
+* File Based Access Log Publisher
+* File Based Audit Log Publisher
+* File Based Debug Log Publisher
+* File Based Error Log Publisher
+* File Based HTTP Access Log Publisher
+* Json File Access Log Publisher
+* Json File HTTP Access Log Publisher
+
+All log publisher types are configurable using `dsconfig` console or directly by its subcommands:
+
+* `create-log-publisher`
+* `delete-log-publisher`
+* `get-log-publisher-prop`
+* `list-log-publishers`
+* `set-log-publisher-prop`
+
+For additional details on each subcommand, you can execute:
+
+[,console]
+----
+$ dsconfig [subcommand] --help
+----
+
+
+== Log Rotation
+
+Log rotation is facilitated through the assignment of one or more of the following policies to log publishers:
+
+* *Fixed Time Log Rotation Policy* +
+Initiates the log rotation process at predetermined time of day (e.g. "2359").
+
+* *Size Limit Log Rotation Policy* +
+Activates log rotation when the log file reaches a specified size limit.
+
+* *Time Limit Log Rotation Policy* +
+Implements log rotation based on the age of the log file.
+Once the log reaches a defined age limit (e.g. "1 d"), it is rotated.
+
+Log rotation policies are configurable using `dsconfig` console or directly by subcommands:
+
+* `create-log-rotation-policy`
+* `delete-log-rotation-policy`
+* `get-log-rotation-policy-prop`
+* `set-log-rotation-policy-prop`
+
+For additional details on each subcommand, you can execute:
+
+[,console]
+----
+$ dsconfig [subcommand] --help
+----
+
+
+== Log Retention
+
+The retention of Wren:DS logs is managed by assigning one or more of the following policies to log publishers:
+
+* *File Count Log Retention Policy* +
+Allows you to specify the maximum number of log files to retain.
+Once this limit is reached, the oldest log files will be automatically deleted.
+
+* *Free Disk Space Log Retention Policy* +
+Ensures that a certain amount of disk space is always free.
+It automatically deletes the oldest log files when the specified disk space threshold is approached.
+
+* *Size Limit Log Retention Policy* +
+Lets you set a maximum size for log files.
+When the total size of the log files exceeds this limit, the oldest files will be removed to maintain the size constraint.
+
+Log retention policies are configurable using `dsconfig` console or directly by its subcommands:
+
+* `create-log-retention-policy`
+* `delete-log-retention-policy`
+* `get-log-retention-policy-prop`
+* `set-log-retention-policy-prop`
+
+For additional details on each subcommand, you can execute:
+
+[,console]
+----
+$ dsconfig [subcommand] --help
+----
